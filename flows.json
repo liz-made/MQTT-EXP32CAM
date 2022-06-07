@@ -1,0 +1,270 @@
+[
+    {
+        "id": "43e5abab049c40df",
+        "type": "tab",
+        "label": "Sistema seguridad",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ace2a5117f8db8fe",
+        "type": "mqtt in",
+        "z": "43e5abab049c40df",
+        "name": "",
+        "topic": "camara/puerta/principal",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "d5814b575fec18f8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "5efb24e2302d0041",
+                "abae4e0bdf537897",
+                "a54985cc5d63f8e0"
+            ]
+        ]
+    },
+    {
+        "id": "abae4e0bdf537897",
+        "type": "function",
+        "z": "43e5abab049c40df",
+        "name": "mensaje de alerta",
+        "func": "mensaje= '*Alerta, movimiento en la puerta principal*';\n//configuracion del payload\nmsg.payload = {\n    chatId : -621231718, \n    type: 'message', \n    content : mensaje\n};\n\n//configuracion de opciones\nmsg.payload.options = {disable_web_page_preview:true, parse_mode:\"Markdown\"};\n\n//envio del mensaje\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "e3d5f18ef879f6e6"
+            ]
+        ]
+    },
+    {
+        "id": "e3d5f18ef879f6e6",
+        "type": "telegram sender",
+        "z": "43e5abab049c40df",
+        "name": "Enviar mensaje",
+        "bot": "a178c7b8c7f85702",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5efb24e2302d0041",
+        "type": "image",
+        "z": "43e5abab049c40df",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 340,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d94c2c885af68ac8",
+        "type": "telegram sender",
+        "z": "43e5abab049c40df",
+        "name": "Enviar imagen",
+        "bot": "a178c7b8c7f85702",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a54985cc5d63f8e0",
+        "type": "function",
+        "z": "43e5abab049c40df",
+        "name": "imagen de alerta",
+        "func": "\npl = {\n    type: 'photo',\n    chatId : -621231718, \n    content : msg.payload\n};\n\nmsg.payload = pl;\n//envio del mensaje\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "d94c2c885af68ac8"
+            ]
+        ]
+    },
+    {
+        "id": "4b3113287743a4d5",
+        "type": "mqtt in",
+        "z": "43e5abab049c40df",
+        "name": "",
+        "topic": "camara/sala",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "d5814b575fec18f8",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "cdb79a708053c6d2",
+                "d84b2cb8b24b7776",
+                "53fd4d18624ea25a"
+            ]
+        ]
+    },
+    {
+        "id": "d84b2cb8b24b7776",
+        "type": "function",
+        "z": "43e5abab049c40df",
+        "name": "mensaje de alerta",
+        "func": "mensaje= '*Alerta, se detecto movimiento en la sala*';\n//configuracion del payload\nmsg.payload = {\n    chatId : -621231718, \n    type: 'message', \n    content : mensaje\n};\n\n//configuracion de opciones\nmsg.payload.options = {disable_web_page_preview:true, parse_mode:\"Markdown\"};\n\n//envio del mensaje\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 100,
+        "wires": [
+            [
+                "5b35e80f1fe027bd"
+            ]
+        ]
+    },
+    {
+        "id": "5b35e80f1fe027bd",
+        "type": "telegram sender",
+        "z": "43e5abab049c40df",
+        "name": "Enviar mensaje",
+        "bot": "a178c7b8c7f85702",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1120,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cdb79a708053c6d2",
+        "type": "image",
+        "z": "43e5abab049c40df",
+        "name": "",
+        "width": 160,
+        "data": "payload",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 920,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "4caefda06fa1b36f",
+        "type": "telegram sender",
+        "z": "43e5abab049c40df",
+        "name": "Enviar imagen",
+        "bot": "a178c7b8c7f85702",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1120,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53fd4d18624ea25a",
+        "type": "function",
+        "z": "43e5abab049c40df",
+        "name": "imagen de alerta",
+        "func": "//mensaje = buffer[1905];\n\npl = {\n    type: 'photo',\n    chatId : -621231718, \n    content : msg.payload\n};\n\nmsg.payload = pl;\n//envio del mensaje\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 160,
+        "wires": [
+            [
+                "4caefda06fa1b36f"
+            ]
+        ]
+    },
+    {
+        "id": "d5814b575fec18f8",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.100.21",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a178c7b8c7f85702",
+        "type": "telegram bot",
+        "botname": "SistemaSeguridad_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "10",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
